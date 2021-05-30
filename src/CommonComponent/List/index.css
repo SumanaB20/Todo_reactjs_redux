@@ -1,0 +1,25 @@
+.list-container {
+    width: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+.list-items {
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 10px;
+    background: white;
+    color: #fba963;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    cursor: pointer;
+}
+.empty-list{
+    background-color: #cb7dc6;
+    padding: 30px;
+}

@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+  font-family: 'Bungee', cursive;
+}
+
+body {
+  background: #FEAC5E; 
+  color: #ffffff;
+  background: -webkit-linear-gradient(to top, #4BC0C8, #C779D0, #FEAC5E); 
+  background: linear-gradient(to top, #4BC0C8, #C779D0, #FEAC5E) fixed; 
+}
