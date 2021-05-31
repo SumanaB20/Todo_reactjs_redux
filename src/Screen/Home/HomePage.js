@@ -47,7 +47,8 @@ function HomePage(props) {
               handleChange={handleChange}
               handleBtn={handleBtn}
               icon={<AddCircleIcon style={{ color: 'white' }}/>}
-              title={"Add"}
+              title={"Create"}
+              label={"Enter Name"}
             />
             {
                 error !== '' &&

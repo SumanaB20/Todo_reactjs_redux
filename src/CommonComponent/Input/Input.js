@@ -69,7 +69,7 @@ function Input(props) {
             <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <ValidationTextField
         className={classes.margin}
-        label={props.title}
+        label={props.label}
         value={value}
         onChange={handleChange}
         variant="outlined"

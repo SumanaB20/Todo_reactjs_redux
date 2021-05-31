@@ -5,8 +5,7 @@ import { editTodo } from '../../Redux/todoList.action';
 import { connect } from 'react-redux';
 
 function TodoEditPage(props) {
-        const name = props.location.state.item.name
-        const key = props.location.state.item.key
+        const { name, key, checked } = props.location.state.item;
         const [value, setValue] = React.useState(name);
         const handleChange =  (val) => {
             setValue(val);
@@ -14,7 +13,7 @@ function TodoEditPage(props) {
         };
         const handleBtn =  (e) => {
             e.preventDefault();
-            props.editTodoDispatch({key: key, name: value});
+            props.editTodoDispatch({key: key, name: value, checked:checked });
             if (props.editError === '') {
                 props.history.push({
                     pathname: '/',
@@ -29,14 +28,15 @@ function TodoEditPage(props) {
                     handleChange={handleChange}
                     handleBtn={handleBtn}
                     icon={<CheckCircleRoundedIcon style={{ color: 'white' }}/>}
-                    title={"Edit"}
+                    title={"Update"}
+                    label={"Enter Name"}
                 />
                 {
-                props.editError !== '' &&
-                <div style={{ color: 'red'}}>
-                    {props.editError}
-                </div>
-            }
+                    props.editError !== '' &&
+                    <div style={{ color: 'red'}}>
+                        {props.editError}
+                    </div>
+                }
             </div>
         )
 }
