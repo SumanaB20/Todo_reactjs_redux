@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../../CommonComponent/Input/Input';
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/Save';
 import { editTodo } from '../../Redux/todoList.action';
 import { connect } from 'react-redux';
 
@@ -15,10 +15,11 @@ function TodoEditPage(props) {
         const handleBtn =  (e) => {
             e.preventDefault();
             props.editTodoDispatch({key: key, name: value});
-            setValue('');
-            props.history.push({
-                pathname: '/',
-            })
+            if (props.editError === '') {
+                props.history.push({
+                    pathname: '/',
+                })
+            }
         };
         return (
             <div>
@@ -30,6 +31,12 @@ function TodoEditPage(props) {
                     icon={<CheckCircleRoundedIcon style={{ color: 'white' }}/>}
                     title={"Edit"}
                 />
+                {
+                props.editError !== '' &&
+                <div style={{ color: 'red'}}>
+                    {props.editError}
+                </div>
+            }
             </div>
         )
 }
@@ -37,4 +44,7 @@ function TodoEditPage(props) {
 const mapDispatchToProps = dispatch => ({
     editTodoDispatch: todo => dispatch(editTodo(todo))
 });
-export default connect(null,mapDispatchToProps)(TodoEditPage);
+const mapStateToProps = state => ({
+    editError: state.editError,
+});
+export default connect(mapStateToProps,mapDispatchToProps)(TodoEditPage);

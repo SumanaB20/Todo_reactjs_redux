@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
@@ -78,13 +78,9 @@ function Input(props) {
         InputProps={{
             endAdornment: (
                 <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={(e)=> props.handleBtn(e)}
-                  edge="end"
-                >
-                  {props.icon}
-                </IconButton>
+                <Button variant="contained" color="secondary" startIcon={props.icon} onClick={(e)=> props.handleBtn(e)}>
+                    {props.title ? props.title : ''}
+                </Button>
               </InputAdornment>
                 ),
         }}

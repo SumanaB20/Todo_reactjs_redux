@@ -3,6 +3,8 @@ import './index.css';
 import DeleteIcon from '@material-ui/icons/CancelRounded';
 import { withRouter } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 function List(props) {
     console.log('List?: ', props)
@@ -10,12 +12,17 @@ function List(props) {
         <div className="list-container">
             {props.data.length > 0 && props.data.map((item,i) => (
                 <div className="list-items" >
-                    <div onClick={()=> {props.history.push({
-                    pathname: '/todoEdit',
-                    state: { item: item }
-                  })}
-                }> {item.name} </div>
-                    <DeleteIcon style={{ color: '#fba963' }} onClick={()=> { props.handleDelete(item)} } />
+                    <div>
+                        <FormControlLabel control={<Checkbox checked={item.checked} onChange={()=> { props.handleCheckbox(item)} } name="checkedA" />} /> 
+                        <span onClick={()=> {props.history.push({
+                                pathname: '/todoEdit',
+                                state: { item: item }
+                            })}}
+                        >
+                            {item.name}
+                        </span>
+                    </div>
+                    <DeleteIcon style={{ color: '#f50057' }} onClick={()=> { props.handleDelete(item)} } />
                 </div>
             ))}
             {

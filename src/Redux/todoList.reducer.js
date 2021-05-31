@@ -13,24 +13,31 @@ export const addTodo = (state = initState, action) => {
                 } 
             });
             if (found === false && action.payload !== '') {
-                arr.push({ key: state.todos.length, name: action.payload})
+                arr.push({ key: (state.todos.length + '-' + action.payload), name: action.payload, checked: false})
                 return {
                     ...state,
-                    todos: arr
+                    todos: [...arr]
                 }
             }
             return state
         }
         case 'EDIT_TODO': {
             const arr = state.todos
+            let err = '';
             arr.map((item,i) => {
                 if(item.key === action.payload.key) {
-                    return item.name = action.payload.name;
+                    if([...arr].some(u=>u.name === action.payload.name)) {
+                        err= 'Item already exists!!';
+                    } else {
+                        err= '';
+                        return item.name = action.payload.name;
+                    }
                 }
             })
             return {
                 ...state,
-                todos: arr
+                todos: [...arr],
+                editError: err,
             }
         }
         case 'DELETE_TODO': {
@@ -38,7 +45,29 @@ export const addTodo = (state = initState, action) => {
             
             return {
                 ...state,
-                todos: arr
+                todos: [...arr]
+            }
+        }
+        case 'CHECK_TODO': {
+            const arr = state.todos
+            arr.map((item,i) => {
+                if(item.key === action.payload.key) {
+                    return item.checked = !action.payload.checked;
+                }
+            })
+            return {
+                ...state,
+                todos: [...arr]
+            }
+        }
+        case 'BULK_DELETE_TODOS': {
+            const arr = [...state.todos];
+            const selected_items = arr.filter((item) => item.checked === true)
+            const arr2 = arr.filter(el => !selected_items.includes(el));
+            console.log('arr2: ', arr2);
+            return {
+                ...state,
+                todos: [...arr2]
             }
         }
         default:
